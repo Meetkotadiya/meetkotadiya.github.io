@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meet Kotadiya | IT Portfolio</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --dark:    #1F3864;
+      --mid:     #2E75B6;
+      --light:   #D6E4F7;
+      --accent:  #4FA3E0;
+      --bg:      #F4F7FB;
+      --white:   #FFFFFF;
+      --text:    #222831;
+      --muted:   #5A6A7E;
+      --border:  #DDE6F0;
+      --green:   #1D9E75;
+      --orange:  #E07B39;
+      --purple:  #534AB7;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ──────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: var(--dark);
+      z-index: 100;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    nav .logo {
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .5px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 6px;
+    }
+    nav ul a {
+      color: #a8c8f0;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all .2s;
+    }
+    nav ul a:hover { background: rgba(255,255,255,.1); color: #fff; }
+
+    /* ── HERO ─────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1F3864 0%, #2E75B6 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 24px 70px;
+    }
+    .avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.15);
+      border: 3px solid rgba(255,255,255,.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+    header h1 { font-size: 38px; font-weight: 700; margin-bottom: 10px; }
+    header .subtitle {
+      font-size: 16px;
+      color: #a8c8f0;
+      margin-bottom: 18px;
+      letter-spacing: .3px;
+    }
+    header .contact-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    header .contact-row a {
+      color: #7EC8E3;
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color .2s;
+    }
+    header .contact-row a:hover { color: #fff; }
+    .noc-pills {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .noc-pill {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.25);
+      color: #d6e8f7;
+      font-size: 12px;
+      padding: 4px 14px;
+      border-radius: 999px;
+    }
+
+    /* ── SECTIONS ─────────────────────────── */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, var(--mid), transparent);
+    }
+    .section-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    /* ── ABOUT ────────────────────────────── */
+    .about-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+    }
+    .about-card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ── SKILLS ───────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .skill-group {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .skill-group h4 {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--mid);
+      margin-bottom: 10px;
+    }
+    .skill-group ul { list-style: none; }
+    .skill-group li {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 3px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .skill-group li::before {
+      content: '▸';
+      color: var(--mid);
+      font-size: 11px;
+    }
+
+    /* ── PROJECTS ─────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media(max-width:640px){ .projects-grid{ grid-template-columns:1fr; } }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.1);
+    }
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .card-icon {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .card-meta { flex: 1; }
+    .card-num {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+    .tag-blue   { background: #E6F1FB; color: #185FA5; }
+    .tag-green  { background: #E1F5EE; color: #0F6E56; }
+    .tag-purple { background: #EEEDFE; color: #3C3489; }
+    .tag-orange { background: #FAEEDA; color: #854F0B; }
+    .tag-red    { background: #FAECE7; color: #993C1D; }
+
+    .btn {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all .2s;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: var(--mid);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--dark); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      cursor: default;
+      font-style: italic;
+    }
+    .btn-soon {
+      background: #F0F4F8;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      font-size: 11px;
+    }
+
+    /* ── STATS BAR ────────────────────────── */
+    .stats-bar {
+      background: var(--dark);
+      padding: 28px 24px;
+    }
+    .stats-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 28px; font-weight: 700; color: #fff; }
+    .stat-lbl { font-size: 12px; color: #a8c8f0; margin-top: 2px; }
+
+    /* ── FOOTER ───────────────────────────── */
+    footer {
+      background: #111D2E;
+      text-align: center;
+      padding: 28px 24px;
+      color: #5A7A99;
+      font-size: 13px;
+    }
+    footer a { color: #4FA3E0; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── DIVIDER ──────────────────────────── */
+    .section-divider {
+      max-width: 860px;
+      margin: 0 auto;
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Meet Kotadiya</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="avatar">👨‍💻</div>
+  <h1>Meet Kotadiya</h1>
+  <p class="subtitle">IT Support Technician &nbsp;·&nbsp; Network Technician &nbsp;·&nbsp; IT Professional</p>
+  <div class="contact-row">
+    <a href="mailto:meetkotadiya0706@gmail.com">✉ meetkotadiya0706@gmail.com</a>
+    <a href="https://github.com/meetkotadiya" target="_blank">⌥ github.com/meetkotadiya</a>
+    <a href="https://meetkotadiya.github.io">🌐 meetkotadiya.github.io</a>
+  </div>
+  <div class="noc-pills">
+    <span class="noc-pill"> IT Support</span>
+    <span class="noc-pill"> Network Tech</span>
+    <span class="noc-pill"> Web &amp; Tech</span>
+    <span class="noc-pill"> Admin</span>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">9</div><div class="stat-lbl">Projects Completed</div></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-lbl">Tools &amp; Technologies</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Self-Taught</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-title">About Me</div>
+  <p class="section-sub">Who I am and what I bring to the table</p>
+  <div class="about-card">
+    <p>
+     I am a self-taught IT professional based in Canada with hands-on experience in IT support, networking, and system administration. Over time, I have built a practical portfolio focused on real-world technical tasks, including help desk support processes, network configuration, Active Directory management, Python scripting, network traffic analysis, and technical documentation.
+      <br><br>
+      I thrive on solving technical problems, documenting solutions clearly, and learning new
+      tools quickly. Every project in this portfolio represents a real skill I can bring to a
+      team from day one.
+    </p>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-title">Skills</div>
+  <p class="section-sub">Tools and technologies I have hands-on experience with</p>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>IT Support</h4>
+      <ul>
+        <li>Help Desk Ticketing</li>
+        <li>Active Directory</li>
+        <li>Microsoft 365</li>
+        <li>Password &amp; Account Mgmt</li>
+        <li>Hardware Troubleshooting</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Networking</h4>
+      <ul>
+        <li>Cisco Packet Tracer</li>
+        <li>TCP/IP &amp; Subnetting</li>
+        <li>Wireshark</li>
+        <li>Network Topology Design</li>
+        <li>VPN &amp; Firewall Basics</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Systems &amp; Scripting</h4>
+      <ul>
+        <li>Python 3</li>
+        <li>Linux (Ubuntu) CLI</li>
+        <li>Windows Server 2022</li>
+        <li>VirtualBox</li>
+        <li>Bash basics</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Productivity &amp; Docs</h4>
+      <ul>
+        <li>Google Sheets / Excel</li>
+        <li>Technical Documentation</li>
+        <li>SOP Writing</li>
+        <li>HTML &amp; CSS</li>
+        <li>GitHub</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<hr class="section-divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-title">Projects</div>
+  <div class="projects-grid">
+
+    <!-- P1 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#E6F1FB;">🎫</div>
+        <div class="card-meta">
+          <div class="card-num">Project 1</div>
+          <div class="card-title">Help Desk Ticket Log</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Built a 10-ticket help desk simulation in Google Sheets covering password resets,
+        printer faults, network drops, and more. Includes colour-coded priority levels,
+        resolution steps, and a live summary dashboard with charts.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-blue">Google Sheets</span>
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1OAUDCKTmB7_z5pYzk0qRiSnQ2fgZXW5rFs7O5WJCu-w/edit?usp=sharing" target="_blank" class="btn btn-primary">View Project</a>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#FAEEDA;">📦</div>
+        <div class="card-meta">
+          <div class="card-num">Project 2</div>
+          <div class="card-title">IT Asset Inventory Tracker</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Tracked 15 company assets (laptops, monitors, phones) across 4 locations with
+        warranty expiry alerts, status dropdowns, conditional formatting, and a
+        summary dashboard with pie and bar charts.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-orange">Google Sheets</span>
+         
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1B4CLibCioapGkVKrnx4Bcep-PD8DLQH2QelwSIONzdI/edit?usp=sharing" target="_blank" class="btn btn-primary">View Project</a>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#FAECE7;">📄</div>
+        <div class="card-meta">
+          <div class="card-num">Project 3</div>
+          <div class="card-title">IT SOP Documentation Package</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Wrote 5 Standard Operating Procedures covering password resets, new user
+        onboarding, software installs, network outage response, and daily backup
+        verification — formatted with a cover page, table of contents, and page numbers.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-red">Google Docs</span>
+          
+        </div>
+        <a href="https://docs.google.com/document/d/16pX0VSHYRX7XMVmdjOcQsefulnLMZKRndRKLHXWgP-s/edit?usp=sharing" target="_blank" class="btn btn-primary">View Project</a>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#EEEDFE;">🌐</div>
+        <div class="card-meta">
+          <div class="card-num">Project 4</div>
+          <div class="card-title">Network Topology — Cisco Packet Tracer</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Designed a small office network with a router, switch, 3 PCs, and a printer in
+        Cisco Packet Tracer. Assigned static IPs on a 192.168.1.0/24 subnet and verified
+        full connectivity using ping tests. Documented with a draw.io network diagram.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-purple">Cisco Packet Tracer</span>
+          
+        </div>
+        <a href="https://github.com/Meetkotadiya/Network-Topology.git" target="_blank" class="btn btn-primary">View Project</a>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#E1F5EE;">💻</div>
+        <div class="card-meta">
+          <div class="card-num">Project 5</div>
+          <div class="card-title">Portfolio Website</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Built and deployed this portfolio website from scratch using HTML and CSS with
+        no frameworks. Hosted live on GitHub Pages — fully responsive with smooth
+        navigation, skill tags, project cards, and a stats bar.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-green">HTML &amp; CSS</span>
+          <span class="tag tag-green">GitHub Pages</span>
+        </div>
+        <a href="https://meetkotadiya.github.io" target="_blank" class="btn btn-primary">You are here</a>
+      </div>
+    </div>
+
+    <!-- P10 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#FAEEDA;">🛡️</div>
+        <div class="card-meta">
+          <div class="card-num">Project 6</div>
+          <div class="card-title">IT Security Audit Checklist</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Created a 25-point security audit checklist across 6 categories — password
+        policies, firewall, backups, software updates, user access, and phishing
+        awareness. Features an auto-calculated risk score and colour-coded dashboard.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-orange">Google Sheets</span>
+          
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1d2foEk0NYa4wEE7r10gaTp6xwC626zT13QnkxVeuHkY/edit?usp=sharing" target="_blank" class="btn btn-primary">View Project</a>
+      </div>
+    </div>
+
+    <!-- P8 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#E6F1FB;">🐍</div>
+        <div class="card-meta">
+          <div class="card-num">Project 7</div>
+          <div class="card-title">Python System Health Monitor</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Wrote a Python script using psutil that monitors CPU, RAM, and disk usage
+        every 10 seconds with colour-coded terminal alerts when thresholds are exceeded.
+        Logs all readings to a timestamped file — similar to how enterprise tools like
+        Zabbix work.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-blue">Python</span>
+          <span class="tag tag-green">GitHub</span>
+        </div>
+        <a href="https://github.com/Meetkotadiya/System_Health_Monitor.git" target="_blank" class="btn btn-primary">View Project</a>
+      </div>
+    </div>
+
+    <!-- P9 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#FAECE7;">🔍</div>
+        <div class="card-meta">
+          <div class="card-num">Project 8</div>
+          <div class="card-title">Wireshark Network Traffic Analysis</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Captured and analysed live network traffic using Wireshark. Identified and
+        documented DNS queries, ICMP ping patterns, TCP 3-way handshakes, and
+        TLS-encrypted HTTPS connections. Findings written up in a 1-page analysis
+        report with annotated screenshots.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-red">Wireshark</span>
+          
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="project-card">
+      <div class="card-top">
+        <div class="card-icon" style="background:#EEEDFE;">🖥️</div>
+        <div class="card-meta">
+          <div class="card-num">Project 9</div>
+          <div class="card-title">Active Directory Home Lab</div>
+        </div>
+      </div>
+      <p class="card-desc">
+        Set up a Windows Server 2022 virtual machine in VirtualBox and configured a
+        full Active Directory domain (meetlab.local). Created 3 Organisational Units,
+        9 user accounts, a security group, and enforced a group policy with a 12-character
+        minimum password length. Practised password resets and account management.
+      </p>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag tag-purple">Windows Server</span>
+          <span class="tag tag-purple">Active Directory</span>
+        </div>
+       
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div style="background:var(--dark);">
+  <section id="contact" style="text-align:center;">
+    <div class="section-title" style="color:#fff;justify-content:center;">
+      <span>Open to Work</span>
+    </div>
+    <p style="color:#a8c8f0;font-size:15px;margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto;">
+        I am currently seeking entry-level opportunities in IT support and network technology across Canada. I would welcome the opportunity to connect and discuss how I can contribute to a team.
+    </p>
+    <a href="mailto:meetkotadiya0706@gmail.com" class="btn btn-primary" style="font-size:15px;padding:12px 32px;border-radius:8px;">
+      ✉ Get In Touch
+    </a>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Meet Kotadiya &nbsp;·&nbsp; Built with HTML &amp; CSS &nbsp;·&nbsp;
+  Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+</footer>
+
+</body>
+</html>
