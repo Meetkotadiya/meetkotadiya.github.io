@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meet Kotadiya | IT Portfolio</title>
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --bg:        #080D1A;
+      --bg2:       #0C1220;
+      --card:      #0F1829;
+      --card2:     #131E30;
+      --border:    rgba(255,255,255,0.07);
+      --border2:   rgba(255,255,255,0.12);
+      --text:      #E2E8F4;
+      --muted:     #7A8AA8;
+      --dim:       #4A5568;
+      --accent:    #4F8EF7;
+      --accent2:   #00D4AA;
+      --accent3:   #F7934F;
+      --white:     #FFFFFF;
+    }
+
+    html { scroll-behavior:smooth; }
+
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:#1E3A5F; border-radius:3px; }
+
+    body {
+      font-family:'Segoe UI', system-ui, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    /* ── NAV ─────────────────────────────── */
+    nav {
+      position:fixed; top:0; left:0; right:0;
+      background:rgba(8,13,26,0.92);
+      backdrop-filter:blur(16px);
+      z-index:1000;
+      padding:0 36px;
+      height:58px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid var(--border);
+    }
+    .logo {
+      display:flex; align-items:center; gap:10px;
+      color:var(--white); font-weight:700; font-size:16px;
+    }
+    .logo-pulse {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--accent2);
+      animation:pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%,100%{opacity:1;transform:scale(1)}
+      50%{opacity:.4;transform:scale(1.4)}
+    }
+    nav ul { list-style:none; display:flex; gap:4px; }
+    nav a {
+      color:var(--muted); text-decoration:none;
+      font-size:13px; font-weight:500;
+      padding:6px 14px; border-radius:6px;
+      transition:all .2s;
+    }
+    nav a:hover { color:var(--white); background:rgba(255,255,255,.06); }
+    .nav-hire {
+      background:var(--accent) !important;
+      color:var(--white) !important;
+    }
+    .nav-hire:hover { background:#3a7de8 !important; }
+
+    /* ── HERO ────────────────────────────── */
+    header {
+      min-height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      text-align:center;
+      padding:110px 24px 80px;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(79,142,247,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0,212,170,0.07) 0%, transparent 60%),
+        var(--bg);
+    }
+    header::before {
+      content:'';
+      position:absolute; inset:0;
+      background-image:radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size:36px 36px;
+      pointer-events:none;
+    }
+    .hero-inner { position:relative; z-index:1; max-width:720px; }
+    
+    .status-dot {
+      width:7px; height:7px; border-radius:50%;
+      background:var(--accent2);
+      animation:pulse 2s infinite;
+    }
+    h1 {
+      font-size:clamp(38px,7vw,64px);
+      font-weight:800;
+      color:var(--white);
+      line-height:1.1;
+      letter-spacing:-1.5px;
+      margin-bottom:18px;
+    }
+    h1 em {
+      font-style:normal;
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .hero-sub {
+      font-size:17px;
+      color:var(--muted);
+      margin-bottom:36px;
+      line-height:1.6;
+    }
+    .hero-btns {
+      display:flex; justify-content:center;
+      gap:12px; flex-wrap:wrap;
+      margin-bottom:48px;
+    }
+    .hbtn {
+      padding:11px 24px; border-radius:8px;
+      font-size:14px; font-weight:600;
+      text-decoration:none; transition:all .22s;
+      display:inline-flex; align-items:center; gap:7px;
+    }
+    .hbtn-primary {
+      background:var(--accent); color:#fff;
+    }
+    .hbtn-primary:hover { background:#3a7de8; transform:translateY(-2px); box-shadow:0 8px 24px rgba(79,142,247,.3); }
+    .hbtn-ghost {
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      border:1px solid var(--border2);
+    }
+    .hbtn-ghost:hover { background:rgba(255,255,255,.1); transform:translateY(-2px); }
+    .chips { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+    .chip {
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--border2);
+      color:var(--muted);
+      font-size:12px; font-weight:500;
+      padding:5px 14px; border-radius:999px;
+    }
+    .scroll-cue {
+      position:absolute; bottom:36px; left:50%;
+      transform:translateX(-50%);
+      color:var(--dim); font-size:11px;
+      letter-spacing:.1em; text-transform:uppercase;
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      animation:float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100%{transform:translateX(-50%) translateY(0)}
+      50%{transform:translateX(-50%) translateY(8px)}
+    }
+
+    /* ── BAND ────────────────────────────── */
+    .band {
+      background:var(--card);
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      padding:26px 24px;
+    }
+    .band-inner {
+      max-width:860px; margin:0 auto;
+      display:flex; justify-content:space-around;
+      align-items:center; flex-wrap:wrap; gap:20px;
+    }
+    .band-item { display:flex; align-items:center; gap:12px; }
+    .band-icon {
+      width:42px; height:42px; border-radius:10px;
+      background:rgba(79,142,247,.1);
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px;
+    }
+    .band-val { font-size:20px; font-weight:700; color:var(--white); }
+    .band-lbl { font-size:12px; color:var(--muted); margin-top:1px; }
+    .band-sep { width:1px; height:36px; background:var(--border); }
+
+    /* ── SECTION WRAPPER ─────────────────── */
+    .sw { max-width:900px; margin:0 auto; padding:72px 24px; }
+    .sh { margin-bottom:40px; }
+    .slabel {
+      font-size:11px; font-weight:700;
+      text-transform:uppercase; letter-spacing:.14em;
+      color:var(--accent); margin-bottom:8px;
+    }
+    .stitle {
+      font-size:30px; font-weight:800;
+      color:var(--white); letter-spacing:-.5px;
+      margin-bottom:6px;
+    }
+    .ssub { font-size:15px; color:var(--muted); }
+
+    /* ── ABOUT ───────────────────────────── */
+    .about-wrap { background:var(--bg2); }
+    .about-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    @media(max-width:640px){.about-grid{grid-template-columns:1fr}}
+    .acard {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:26px;
+    }
+    .acard.wide { grid-column:1/-1; }
+    .acard p { font-size:14px; color:var(--muted); line-height:1.85; }
+    .acard-top {
+      display:flex; align-items:center; gap:11px;
+      margin-bottom:14px;
+    }
+    .aicon {
+      width:40px; height:40px; border-radius:9px;
+      background:linear-gradient(135deg,rgba(79,142,247,.3),rgba(0,212,170,.2));
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px;
+    }
+    .acard h3 { font-size:15px; font-weight:700; color:var(--white); }
+
+    /* ── SKILLS ──────────────────────────── */
+    .skills-wrap { background:var(--bg); }
+    .skills-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:14px;
+    }
+    .scard {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:20px;
+      transition:transform .2s, border-color .2s;
+    }
+    .scard:hover { transform:translateY(-4px); border-color:var(--border2); }
+    .scard-top {
+      display:flex; align-items:center; gap:10px;
+      margin-bottom:14px;
+    }
+    .sicon {
+      width:36px; height:36px; border-radius:8px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:17px;
+    }
+    .scard h4 { font-size:13px; font-weight:700; color:var(--white); }
+    .scard ul { list-style:none; }
+    .scard li {
+      font-size:13px; color:var(--muted);
+      padding:5px 0;
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; gap:8px;
+    }
+    .scard li:last-child { border-bottom:none; }
+    .scard li::before {
+      content:''; width:4px; height:4px;
+      border-radius:50%; background:var(--accent);
+      flex-shrink:0;
+    }
+
+    /* ── PROJECTS ────────────────────────── */
+    .projects-wrap { background:var(--bg2); }
+    .pgrid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+    @media(max-width:640px){.pgrid{grid-template-columns:1fr}}
+
+    .pcard {
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:22px;
+      display:flex; flex-direction:column;
+      position:relative; overflow:hidden;
+      transition:transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .pcard::after {
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:2px;
+    }
+    .pcard:hover {
+      transform:translateY(-5px);
+      border-color:var(--border2);
+      box-shadow:0 16px 40px rgba(0,0,0,.4);
+    }
+    .b-blue::after    { background:linear-gradient(90deg,#185FA5,#4F8EF7); }
+    .b-orange::after  { background:linear-gradient(90deg,#E07B39,#F7B26A); }
+    .b-red::after     { background:linear-gradient(90deg,#993C1D,#E07060); }
+    .b-purple::after  { background:linear-gradient(90deg,#534AB7,#8B85E8); }
+    .b-green::after   { background:linear-gradient(90deg,#0F6E56,#2EC99A); }
+    .b-teal::after    { background:linear-gradient(90deg,#0B5E52,#17C9A8); }
+    .b-python::after  { background:linear-gradient(90deg,#3776AB,#FFD43B); }
+    .b-wire::after    { background:linear-gradient(90deg,#1F3864,#4F8EF7); }
+    .b-ad::after      { background:linear-gradient(90deg,#00188F,#0078D4); }
+    .b-ps::after      { background:linear-gradient(90deg,#012456,#2671BE); }
+    .b-aws::after     { background:linear-gradient(90deg,#FF9900,#FFD580); }
+
+    .featured {
+      position:absolute; top:14px; right:14px;
+      background:linear-gradient(135deg,#F7934F,#FFB86A);
+      color:#fff; font-size:10px; font-weight:700;
+      padding:3px 10px; border-radius:999px;
+      letter-spacing:.06em; text-transform:uppercase;
+    }
+    .ctop {
+      display:flex; align-items:flex-start;
+      gap:12px; margin-bottom:12px;
+    }
+    .cicon {
+      width:40px; height:40px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:19px; flex-shrink:0;
+    }
+    .cmeta { flex:1; }
+    .cnum {
+      font-size:10px; font-weight:700;
+      text-transform:uppercase; letter-spacing:.1em;
+      color:var(--dim); margin-bottom:2px;
+    }
+    .ctitle { font-size:15px; font-weight:700; color:var(--white); line-height:1.3; }
+    .cdesc {
+      font-size:13px; color:var(--muted);
+      line-height:1.7; flex:1; margin-bottom:16px;
+    }
+    .cfoot {
+      display:flex; align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap; gap:8px;
+      margin-top:auto;
+    }
+    .ctags { display:flex; gap:5px; flex-wrap:wrap; }
+    .tag {
+      font-size:11px; font-weight:600;
+      padding:3px 10px; border-radius:999px;
+    }
+    .t-blue   { background:rgba(79,142,247,.12);  color:#6EB0FF; }
+    .t-green  { background:rgba(0,212,170,.1);    color:#00D4AA; }
+    .t-purple { background:rgba(139,133,232,.12); color:#9B95EE; }
+    .t-orange { background:rgba(247,147,79,.12);  color:#F7A56A; }
+    .t-red    { background:rgba(224,112,96,.12);  color:#E08070; }
+    .t-teal   { background:rgba(23,201,168,.1);   color:#17C9A8; }
+    .t-aws    { background:rgba(255,153,0,.1);    color:#FFA830; }
+    .t-ps     { background:rgba(38,113,190,.12);  color:#4E8FD4; }
+    .t-white  { background:rgba(255,255,255,.06); color:var(--muted); }
+
+    .btn {
+      font-size:12px; font-weight:600;
+      padding:7px 16px; border-radius:7px;
+      text-decoration:none; transition:all .2s;
+      display:inline-flex; align-items:center; gap:5px;
+    }
+    .btn-accent { background:var(--accent); color:#fff; }
+    .btn-accent:hover { background:#3a7de8; transform:translateY(-1px); }
+    .btn-gh { background:rgba(255,255,255,.07); color:var(--text); border:1px solid var(--border2); }
+    .btn-gh:hover { background:rgba(255,255,255,.12); }
+
+    /* ── CONTACT ─────────────────────────── */
+    .contact-wrap {
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(79,142,247,.1) 0%, transparent 70%),
+        var(--card);
+      border-top:1px solid var(--border);
+    }
+    .contact-inner {
+      max-width:580px; margin:0 auto;
+      padding:80px 24px; text-align:center;
+    }
+    .clabel {
+      font-size:11px; font-weight:700;
+      text-transform:uppercase; letter-spacing:.14em;
+      color:var(--accent2); margin-bottom:12px;
+    }
+    .contact-inner h2 {
+      font-size:36px; font-weight:800;
+      color:var(--white); letter-spacing:-.5px;
+      margin-bottom:14px;
+    }
+    .contact-inner p {
+      color:var(--muted); font-size:15px;
+      margin-bottom:36px; line-height:1.75;
+    }
+    .cbtns { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
+    .cbtn {
+      padding:13px 28px; border-radius:9px;
+      font-size:14px; font-weight:600;
+      text-decoration:none; transition:all .22s;
+    }
+    .cbtn-primary { background:var(--accent); color:#fff; }
+    .cbtn-primary:hover { background:#3a7de8; transform:translateY(-2px); box-shadow:0 8px 24px rgba(79,142,247,.3); }
+    .cbtn-ghost { background:rgba(255,255,255,.06); color:var(--text); border:1px solid var(--border2); }
+    .cbtn-ghost:hover { background:rgba(255,255,255,.12); transform:translateY(-2px); }
+
+    /* ── FOOTER ──────────────────────────── */
+    footer {
+      background:var(--bg);
+      border-top:1px solid var(--border);
+      text-align:center;
+      padding:24px;
+      color:var(--dim); font-size:13px;
+    }
+    footer a { color:var(--muted); text-decoration:none; }
+    footer a:hover { color:var(--accent); }
+
+    /* ── DIVIDER ──────────────────────────── */
+    hr { border:none; border-top:1px solid var(--border); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-pulse"></div>
+    Meet Kotadiya
+  </div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact" class="nav-hire">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="hero-inner">
+    <div class="hero-status">
+    </div> 
+    <h1>Meet <em>Kotadiya</em></h1>
+    <p class="hero-sub">IT Support Technician &nbsp;·&nbsp; Network Technician &nbsp;·&nbsp; IT Professional</p>
+    <div class="hero-btns">
+      <a href="#projects" class="hbtn hbtn-primary">View My Work ↓</a>
+      <a href="mailto:meetkotadiya0706@gmail.com" class="hbtn hbtn-ghost">✉ Email Me</a>
+      <a href="https://github.com/meetkotadiya" target="_blank" class="hbtn hbtn-ghost">⌥ GitHub</a>
+    </div>
+    <div class="chips">
+      <span class="chip">IT Support</span>
+      <span class="chip">Network Technician</span>
+      <span class="chip">Systems Administration</span>
+      <span class="chip">Cloud — AWS</span>
+      <span class="chip">Scripting</span>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <span>↓</span>
+  </div>
+</header>
+
+<!-- BAND -->
+<div class="band">
+  <div class="band-inner">
+    <div class="band-item">
+      <div class="band-icon">🛠️</div>
+      <div>
+        <div class="band-val">10+</div>
+        <div class="band-lbl">Tools &amp; Technologies</div>
+      </div>
+    </div>
+    <div class="band-sep"></div>
+    <div class="band-item">
+      <div class="band-icon">🌐</div>
+      <div>
+        <div class="band-val">Canada</div>
+        <div class="band-lbl">Based &amp; Available</div>
+      </div>
+    </div>
+    <div class="band-sep"></div>
+    <div class="band-item">
+      <div class="band-icon">☁️</div>
+      <div>
+        <div class="band-val">AWS</div>
+        <div class="band-lbl">Cloud Hands-On</div>
+      </div>
+    </div>
+    <div class="band-sep"></div>
+    <div class="band-item">
+      <div class="band-icon">⚡</div>
+      <div>
+        <div class="band-val">Python &amp; PS</div>
+        <div class="band-lbl">Scripting Skills</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="about-wrap">
+  <div class="sw">
+    <div class="sh">
+      <div class="slabel">About Me</div>
+      <div class="stitle">Who I am</div>
+      <div class="ssub">A self-driven IT professional with a passion for solving real technical problems</div>
+    </div>
+    <div class="about-grid">
+      <div class="acard wide">
+        <p>I am a self-taught IT professional based in Canada with hands-on experience in IT support, networking, system administration, cloud computing, and automation scripting. I have built a practical portfolio covering help desk operations, network configuration, Active Directory management, Python and PowerShell scripting, AWS cloud services, network traffic analysis, and technical documentation - entirely through self-directed learning and real project work.
+        <br><br>
+        I bring structured problem-solving, clear technical communication, and the ability to learn new tools quickly. Every project in this portfolio represents a real skill I can apply to a team from day one.</p>
+      </div>
+      <div class="acard">
+        <div class="acard-top">
+          <div class="aicon">🎯</div>
+          <h3>What I'm looking for</h3>
+        </div>
+        <p>Entry-level roles in IT support, network technology, or systems administration across Canada. Full-time or contract positions welcome.</p>
+      </div>
+      <div class="acard">
+        <div class="acard-top">
+          <div class="aicon">⚡</div>
+          <h3>How I work</h3>
+        </div>
+        <p>I document everything, follow SOPs, and communicate clearly. I thrive in environments where I can keep learning and contributing from day one.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SKILLS -->
+<div id="skills" class="skills-wrap">
+  <div class="sw">
+    <div class="sh">
+      <div class="slabel">Skills</div>
+      <div class="stitle">What I work with</div>
+      <div class="ssub">Tools and technologies applied in real hands-on projects</div>
+    </div>
+    <div class="skills-grid">
+      <div class="scard">
+        <div class="scard-top">
+          <div class="sicon" style="background:rgba(79,142,247,.12);">🖥️</div>
+          <h4>IT Support</h4>
+        </div>
+        <ul>
+          <li>Help Desk Ticketing</li>
+          <li>Active Directory &amp; AD DS</li>
+          <li>Microsoft 365 Admin</li>
+          <li>Password &amp; Account Mgmt</li>
+          <li>Hardware Troubleshooting</li>
+        </ul>
+      </div>
+      <div class="scard">
+        <div class="scard-top">
+          <div class="sicon" style="background:rgba(139,133,232,.12);">🌐</div>
+          <h4>Networking</h4>
+        </div>
+        <ul>
+          <li>Cisco Packet Tracer</li>
+          <li>TCP/IP &amp; Subnetting</li>
+          <li>Wireshark Packet Analysis</li>
+          <li>Network Topology Design</li>
+          <li>VPN &amp; Firewall Basics</li>
+        </ul>
+      </div>
+      <div class="scard">
+        <div class="scard-top">
+          <div class="sicon" style="background:rgba(0,212,170,.1);">⚙️</div>
+          <h4>Systems &amp; Scripting</h4>
+        </div>
+        <ul>
+          <li>Python 3 (psutil, colorama)</li>
+          <li>PowerShell Automation</li>
+          <li>Linux (Ubuntu) CLI</li>
+          <li>Windows Server 2022</li>
+          <li>VirtualBox / Docker</li>
+        </ul>
+      </div>
+      <div class="scard">
+        <div class="scard-top">
+          <div class="sicon" style="background:rgba(255,153,0,.1);">☁️</div>
+          <h4>Cloud &amp; Monitoring</h4>
+        </div>
+        <ul>
+          <li>AWS EC2, S3, IAM</li>
+          <li>SSH &amp; Remote Access</li>
+          <li>System Health Monitoring</li>
+          <li>Docker Desktop</li>
+          <li>GitHub Version Control</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PROJECTS -->
+<div id="projects" class="projects-wrap">
+  <div class="sw">
+    <div class="sh">
+      <div class="slabel">Projects</div>
+      <div class="stitle">What I've built</div>
+      <div class="ssub">Hands-on projects built from scratch using free tools each one demonstrates a real job skill</div>
+    </div>
+    <div class="pgrid">
+
+      <!-- 01 -->
+      <div class="pcard b-blue">
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(79,142,247,.1);">🎫</div>
+          <div class="cmeta">
+            <div class="cnum">Project 01</div>
+            <div class="ctitle">Help Desk Ticket Log</div>
+          </div>
+        </div>
+        <p class="cdesc">Simulated 10 real IT support tickets in Google Sheets covering password resets, printer faults, network drops, VPN issues, and new user setups. Includes colour-coded priority levels (Critical to Low), detailed resolution steps, and a live summary dashboard with charts tracking average resolution times and ticket volume by category.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-blue">Google Sheets</span>
+            <span class="tag t-white">IT Support</span>
+          </div>
+          <a href="https://docs.google.com/spreadsheets/d/1OAUDCKTmB7_z5pYzk0qRiSnQ2fgZXW5rFs7O5WJCu-w/edit?usp=sharing" target="_blank" class="btn btn-accent">View ↗</a>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="pcard b-orange">
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(247,147,79,.1);">📦</div>
+          <div class="cmeta">
+            <div class="cnum">Project 02</div>
+            <div class="ctitle">IT Asset Inventory Tracker</div>
+          </div>
+        </div>
+        <p class="cdesc">Tracked 15 company assets — laptops, monitors, and phones — across 4 office locations. Features automatic warranty expiry alerts highlighted in red, status dropdowns with conditional formatting, and a live summary dashboard with pie and bar charts showing asset distribution by type, location, and status.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-orange">Google Sheets</span>
+            <span class="tag t-white">Asset Management</span>
+          </div>
+          <a href="https://docs.google.com/spreadsheets/d/1B4CLibCioapGkVKrnx4Bcep-PD8DLQH2QelwSIONzdI/edit?usp=sharing" target="_blank" class="btn btn-accent">View ↗</a>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="pcard b-red">
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(224,112,96,.1);">📄</div>
+          <div class="cmeta">
+            <div class="cnum">Project 03</div>
+            <div class="ctitle">IT SOP Documentation Package</div>
+          </div>
+        </div>
+        <p class="cdesc">Authored 5 Standard Operating Procedures covering password resets, new user onboarding, software installation, network outage response, and daily backup verification. Each SOP follows a structured format with Purpose, Scope, numbered Steps, and Notes — formatted with a cover page, auto-updating table of contents, and page numbers.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-red">Google Docs</span>
+            <span class="tag t-white">Documentation</span>
+          </div>
+          <a href="https://docs.google.com/document/d/16pX0VSHYRX7XMVmdjOcQsefulnLMZKRndRKLHXWgP-s/edit?usp=sharing" target="_blank" class="btn btn-accent">View ↗</a>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="pcard b-purple">
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(139,133,232,.1);">🌐</div>
+          <div class="cmeta">
+            <div class="cnum">Project 04</div>
+            <div class="ctitle">Network Topology — Cisco Packet Tracer</div>
+          </div>
+        </div>
+        <p class="cdesc">Designed and configured a small office network in Cisco Packet Tracer — a router (2911), switch (2960), 3 PCs, and a printer connected on a 192.168.1.0/24 subnet with static IP assignment. Verified full connectivity with successful ping tests between all devices and documented the layout with a labelled draw.io network diagram.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-purple">Cisco Packet Tracer</span>
+            <span class="tag t-white">Networking</span>
+          </div>
+          <a href="https://github.com/Meetkotadiya/Network-Topology.git" target="_blank" class="btn btn-gh">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="pcard b-green">
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(0,212,170,.08);">💻</div>
+          <div class="cmeta">
+            <div class="cnum">Project 05</div>
+            <div class="ctitle">Portfolio Website</div>
+          </div>
+        </div>
+        <p class="cdesc">Designed and built this portfolio website from scratch using pure HTML and CSS — no frameworks or templates. Features a dark professional theme, animated hero section, responsive grid layout, skills cards, project showcase, and a sticky navigation bar. Deployed live via GitHub Pages with a custom domain path.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-green">HTML &amp; CSS</span>
+            <span class="tag t-green">GitHub Pages</span>
+          </div>
+          <a href="https://meetkotadiya.github.io" class="btn btn-accent">You are here ✓</a>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="pcard b-teal">
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(23,201,168,.08);">🛡️</div>
+          <div class="cmeta">
+            <div class="cnum">Project 06</div>
+            <div class="ctitle">IT Security Audit Checklist</div>
+          </div>
+        </div>
+        <p class="cdesc">Built a 25-point security audit tool in Google Sheets covering password policies, firewall configuration, backup procedures, software patching, user access controls, and phishing awareness. Features dropdown Pass/Fail/Partial inputs, auto-calculated risk score out of 100, and a colour-coded dashboard classifying findings as Low, Medium, or High risk.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-teal">Google Sheets</span>
+            <span class="tag t-white">Security</span>
+          </div>
+          <a href="https://docs.google.com/spreadsheets/d/1d2foEk0NYa4wEE7r10gaTp6xwC626zT13QnkxVeuHkY/edit?usp=sharing" target="_blank" class="btn btn-accent">View ↗</a>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="pcard b-python">
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(55,118,171,.1);">🐍</div>
+          <div class="cmeta">
+            <div class="cnum">Project 07</div>
+            <div class="ctitle">Python System Health Monitor</div>
+          </div>
+        </div>
+        <p class="cdesc">Developed a Python monitoring script using psutil that polls CPU, RAM, and disk usage every 10 seconds and outputs colour-coded terminal alerts when metrics exceed configurable thresholds. All readings are written to a timestamped log file for historical review — modelled after how enterprise monitoring tools like Zabbix work in real NOC environments.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-blue">Python 3</span>
+            <span class="tag t-green">GitHub</span>
+          </div>
+          <a href="https://github.com/Meetkotadiya/System_Health_Monitor.git" target="_blank" class="btn btn-gh">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- 08 — Wireshark (no link) -->
+      <div class="pcard b-wire">
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(79,142,247,.08);">🔍</div>
+          <div class="cmeta">
+            <div class="cnum">Project 08</div>
+            <div class="ctitle">Wireshark Network Traffic Analysis</div>
+          </div>
+        </div>
+        <p class="cdesc">Captured and analysed live network traffic on a local interface using Wireshark. Applied display filters to isolate and study four protocol types: DNS queries (domain name resolution), ICMP ping request-reply cycles with response timing, TCP 3-way handshakes (SYN → SYN-ACK → ACK), and TLS-encrypted HTTPS sessions. Findings were documented in a written analysis report with annotated screenshots explaining each traffic pattern and its role in network communication.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-blue">Wireshark</span>
+            <span class="tag t-white">Packet Analysis</span>
+            <span class="tag t-white">Networking</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 09 — Active Directory (no link) -->
+      <div class="pcard b-ad">
+        <div class="featured">⭐ Featured</div>
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(0,120,212,.1);">🖥️</div>
+          <div class="cmeta">
+            <div class="cnum">Project 09</div>
+            <div class="ctitle">Active Directory Home Lab</div>
+          </div>
+        </div>
+        <p class="cdesc">Deployed a Windows Server 2022 virtual machine in VirtualBox and built a fully functional Active Directory domain from scratch (meetlab.local). Configured 3 Organisational Units representing IT, HR, and Finance departments and created 9 user accounts with realistic naming conventions. Set up a security group with assigned members, enforced a Group Policy requiring a minimum 12-character password length with 90-day expiry, and practised core account management tasks including password resets, account disabling, and group membership changes.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-ps">Windows Server 2022</span>
+            <span class="tag t-ps">Active Directory</span>
+            <span class="tag t-white">VirtualBox</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 — PowerShell -->
+      <div class="pcard b-ps">
+        <div class="featured">⭐ Featured</div>
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(38,113,190,.1);">⚡</div>
+          <div class="cmeta">
+            <div class="cnum">Project 10</div>
+            <div class="ctitle">PowerShell IT Automation Scripts</div>
+          </div>
+        </div>
+        <p class="cdesc">Wrote 5 PowerShell scripts that automate repetitive IT tasks: a colour-coded disk space report with warning thresholds across all drives, an installed software inventory exported to CSV, a service health checker that auto-restarts stopped critical services, a full system information report (OS, CPU, RAM, uptime), and a multi-target network connectivity tester showing per-host response times. Each script runs directly from the PowerShell terminal with no dependencies.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-ps">PowerShell</span>
+            <span class="tag t-green">GitHub</span>
+          </div>
+          <a href="https://github.com/Meetkotadiya/powershell-it-scripts-.git" target="_blank" class="btn btn-gh">GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- 11 — AWS (no link) -->
+      <div class="pcard b-aws">
+        <div class="featured">⭐ Featured</div>
+        <div class="ctop">
+          <div class="cicon" style="background:rgba(255,153,0,.1);">☁️</div>
+          <div class="cmeta">
+            <div class="cnum">Project 11</div>
+            <div class="ctitle">AWS Cloud Fundamentals Lab</div>
+          </div>
+        </div>
+        <p class="cdesc">Completed a hands-on AWS lab using the Free Tier covering three core services. Launched an EC2 t2.micro Linux instance in us-east-1, configured security group rules for SSH access, and connected remotely via terminal using a .pem key pair. Created an S3 bucket with uploaded files demonstrating object storage. Configured two IAM users with scoped policies (S3 read-only and read-only access) following the principle of least privilege — a core security practice in cloud environments.</p>
+        <div class="cfoot">
+          <div class="ctags">
+            <span class="tag t-aws">AWS EC2</span>
+            <span class="tag t-aws">S3</span>
+            <span class="tag t-aws">IAM</span>
+            <span class="tag t-white">Cloud</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-inner">
+    <div class="clabel">Let's Connect</div>
+    <h2>Open to Opportunities</h2>
+    <p>I am actively seeking entry-level opportunities in IT support and network technology across Canada. I would love to connect and discuss how I can contribute to your team.</p>
+    <div class="cbtns">
+      <a href="mailto:meetkotadiya0706@gmail.com" class="cbtn cbtn-primary">✉ Send an Email</a>
+      <a href="https://github.com/meetkotadiya" target="_blank" class="cbtn cbtn-ghost">⌥ View GitHub</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Meet Kotadiya &nbsp;·&nbsp; Built with HTML &amp; CSS &nbsp;·&nbsp;
+  Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+</footer>
+
+</body>
+</html>
